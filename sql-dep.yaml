@@ -22,12 +22,8 @@ spec:
         - name: MYSQL_ROOT_PASSWORD
           value: pw
         volumeMounts:
-        - mountPath: /data/db
-          name: mysql-pvc
-        resources:
-          requests:
-            cpu: 100m
-            memory: 100Mi
+        - name: mysql-data 
+          mountPath: /var/lib/mysql
         ports:
         - name: mysql
           containerPort: 3306
