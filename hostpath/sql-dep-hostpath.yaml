@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  namespace: lab3
+  labels:
+    app: mysql
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      volumes:
+       - name: mysql-pvc-hostpath
+         persistentVolumeClaim:
+           claimName: mysql-pvc-hostpath    
+      containers:
+      - image: 914379829654.dkr.ecr.us-east-1.amazonaws.com/my_sql:v0.3
+        name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: pw
+        volumeMounts:
+        - name: mysql-pvc-hostpath
+          mountPath: /var/lib/mysql
+        ports:
+        - name: mysql
+          containerPort: 3306
