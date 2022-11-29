@@ -1,14 +1,13 @@
 apiVersion: v1
-kind: PersistentVolumeClaim
+kind: Service
 metadata:
-  name: mysql-pvc
+  name: mysql
   namespace: lab3
-  annotations:
-    volume.beta.kubernetes.io/storage-class: standard 
+  labels:
+    app: mysql
 spec:
-  storageClassName: standard
-  resources:
-    requests:
-      storage: 4Gi
-  accessModes:
-    - ReadWriteOnce
+  ports:
+  - port: 3306
+    targetPort: 3306
+  selector:
+    app: mysql
