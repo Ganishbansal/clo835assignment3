@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: colorapp-config
+    namespace: myapp
+data:
+    APP_COLOR: "blue"
